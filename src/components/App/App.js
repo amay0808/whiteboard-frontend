@@ -1,22 +1,21 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Box } from "@mui/material";
-import "./App.css";
+import "./app.css";
 import Navbar from "../Navbar/Navbar";
 import Home from "../../Pages/Home";
 import Footer from "../Footer/footer";
-import ExerciseDetail from "../../Pages/Exercise";
+import ExerciseDetail from "../../Pages/ExerciseDetail";
 
 const App = () => {
   return (
-    <Box width="400px" sx={{ width: { x1: "1488px" } }} m="auto">
+    <div className="app-container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/excersie/:id" element={<ExerciseDetail />} />
+        <Route path="/exercise/:id" element={<ExerciseDetail />} />
       </Routes>
       <Footer />
-    </Box>
+    </div>
   );
 };
 

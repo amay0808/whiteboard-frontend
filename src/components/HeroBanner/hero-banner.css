@@ -1,0 +1,41 @@
+/* Block: hero-banner */
+
+.hero-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-right: 80px;
+}
+
+/* Element: hero-banner__content */
+.hero-banner__content {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 5%; /* Reduced from 20px, consider using percentages for responsiveness */
+}
+
+.hero-banner__title {
+  color: #0070b2;
+  font-weight: 600;
+  /* font-size: 44px; Increased the font-size */
+}
+
+.hero-banner__img {
+  border-radius: 50px;
+  width: 45%; /* Reduced from 50% */
+  max-width: 475px; /* Reduced a bit */
+  height: auto;
+  object-fit: cover;
+  margin-left: -5%; /* Moves the image 5% to the left */
+}
+
+@media (max-width: 768px) {
+  .hero-banner__content,
+  .hero-banner__img {
+    width: 100%; /* On smaller screens, both content and image take full width */
+  }
+}
