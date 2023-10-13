@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { exerciseOptions, fetchData } from "../../utils/fetchData";
 
 const SearchExercises = () => {
+  const [search, setSearch] = useState("");
+  const [excercise, setExcercises] = useState([]);
+  const handleSearch = async () => {
+    if (search) {
+      const exercisesData = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises",
+        exerciseOptions
+      );
+      const searchedExercises = exercisesData.filter(
+        (exercise) =>
+          exercise.name.toLowerCase().includes(search) ||
+          exercise.target.toLowerCase().includes(search) ||
+          exercise.equipment.toLowerCase().includes(search) ||
+          exercise.bodyPart.toLowerCase().includes(search)
+      );
+      setSearch("");
+      setExcercises(searchedExercises);
+    }
+  };
+
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
       <Typography
         fontWeight={700}
-        sx={{ fontSize: { lg: "44px", xs: "30px" }, color: "textPrimary" }} // Applying the blue color to the title
+        sx={{ fontSize: { lg: "44px", xs: "30px" }, color: "textPrimary" }}
         mb="50px"
         textAlign="center"
       >
@@ -15,8 +36,9 @@ const SearchExercises = () => {
       </Typography>
       <Box position="relative" mb="72px">
         <TextField
-          variant="outlined" // This is important
+          variant="outlined"
           sx={{
+            height: "76px",
             input: {
               fontWeight: "700",
               borderRadius: "4px",
@@ -28,7 +50,6 @@ const SearchExercises = () => {
             paddingRight: "100px",
             border: "none",
             "& .MuiOutlinedInput-root": {
-              // Target the outlined root
               "& fieldset": {
                 border: "none",
               },
@@ -42,6 +63,8 @@ const SearchExercises = () => {
           }}
           placeholder="Search Exercises"
           type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
         />
         <Button
           className="search-btn"
@@ -52,10 +75,11 @@ const SearchExercises = () => {
             position: "absolute",
             top: "50%",
             right: "15px",
-            transform: "translateY(-50%)", // Center the button vertically
+            transform: "translateY(-50%)",
             width: { lg: "175px", xs: "80px" },
             borderRadius: "20px",
           }}
+          onClick={handleSearch}
         >
           Search
         </Button>
