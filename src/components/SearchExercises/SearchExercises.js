@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react"; // Added useEffect import
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { exerciseOptions, fetchData } from "../../utils/fetchData"; // Corrected variable name
 import { HorizontalScrollbar } from "../HorizontalScrollbar/HorizontalScrollbar";
+import BodyPart from "../BodyPart/BodyPart"; // Corrected import
 
-const SearchExercises = () => {
+const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
   const [search, setSearch] = useState("");
-  const [exercise, setExercises] = useState([]); // Corrected variable name
   const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
@@ -100,7 +100,11 @@ const SearchExercises = () => {
         </Button>
       </Box>
       <Box sx={{ position: "relative", width: "100%", p: "20px" }}>
-        <HorizontalScrollbar data={bodyParts} />
+        <HorizontalScrollbar
+          data={bodyParts}
+          bodyPart={BodyPart} // Make sure this usage is correct and necessary
+          setBodyPart={setBodyPart}
+        />
       </Box>
     </Stack>
   );

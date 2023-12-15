@@ -1,7 +1,8 @@
 import React from "react";
 import { Box } from "@mui/material";
+import BodyPart from "../BodyPart/BodyPart"; // Corrected import
 
-export const HorizontalScrollbar = ({ data }) => {
+export const HorizontalScrollbar = ({ data, bodyPart, setBodyPart }) => {
   // Corrected the map function and added a key prop
   return (
     <div>
@@ -12,7 +13,11 @@ export const HorizontalScrollbar = ({ data }) => {
           title={item.id || item}
           m="0 40px"
         >
-          {item}
+          <BodyPart
+            item={item}
+            selectedBodyPart={BodyPart}
+            setBodyPart={setBodyPart}
+          />
         </Box>
       ))}
     </div>
